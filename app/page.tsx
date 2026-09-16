@@ -30,6 +30,7 @@ const commands = [
 
 export default function Home() {
   const [input, setInput] = useState("");
+
   const [output, setOutput] = useState<string[]>([
     "Welcome to Harshwardhan Paygude's terminal portfolio.",
     "Type 'help' to see available commands.",
@@ -42,14 +43,15 @@ export default function Home() {
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Automatically scroll to the latest terminal output
+  // Automatically scroll to newest output
   useEffect(() => {
     if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+      terminalRef.current.scrollTop =
+        terminalRef.current.scrollHeight;
     }
   }, [output]);
 
-  // Keep terminal input focused
+  // Keep input focused
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
@@ -66,18 +68,19 @@ export default function Home() {
     const project = resume.projects[index];
 
     if (!project) {
-      return ["Project not found."];
+      return ["", "Project not found.", ""];
     }
 
     return [
       "",
-      `┌─ ${project.title}`,
-      `│`,
+      `┌─ ${project.name}`,
+      "│",
       `│ Date: ${project.date}`,
       `│ Technologies: ${project.technologies.join(", ")}`,
-      `│`,
-      `│ ${project.description}`,
-      `└────────────────────────────────────────`,
+      "│",
+      ...project.description.map((item) => `│ ${item}`),
+      "│",
+      "└────────────────────────────────────────",
       "",
     ];
   };
@@ -120,6 +123,7 @@ export default function Home() {
         "  clear                → Clear terminal",
         "",
       ]);
+
       return;
     }
 
@@ -132,9 +136,10 @@ export default function Home() {
         "",
         "I am a Computer Science student focused on",
         "Artificial Intelligence, Machine Learning,",
-        "Generative AI and computer vision.",
+        "Generative AI and Computer Vision.",
         "",
       ]);
+
       return;
     }
 
@@ -147,11 +152,12 @@ export default function Home() {
         "",
         ...resume.education.flatMap((edu) => [
           `${edu.year} | ${edu.degree}`,
-          `${edu.institution}`,
-          `Result: ${edu.result}`,
+          `${edu.institute}`,
+          `Score: ${edu.score}`,
           "",
         ]),
       ]);
+
       return;
     }
 
@@ -169,6 +175,7 @@ export default function Home() {
         `Generative AI:   ${resume.skills.generativeAI.join(", ")}`,
         "",
       ]);
+
       return;
     }
 
@@ -187,6 +194,7 @@ export default function Home() {
           "",
         ]),
       ]);
+
       return;
     }
 
@@ -198,7 +206,7 @@ export default function Home() {
         "────────",
         "",
         ...resume.projects.flatMap((project, index) => [
-          `[${index + 1}] ${project.title}`,
+          `[${index + 1}] ${project.name}`,
           `    ${project.date}`,
           `    ${project.technologies.join(", ")}`,
           "",
@@ -206,6 +214,7 @@ export default function Home() {
         "Use 'project 1', 'project 2', etc. for details.",
         "",
       ]);
+
       return;
     }
 
@@ -244,10 +253,14 @@ export default function Home() {
         "",
         `Conference: ${resume.research.conference}`,
         `Date: ${resume.research.date}`,
+        `Result: ${resume.research.result}`,
         "",
-        resume.research.description,
+        resume.research.detail,
+        "",
+        `Technologies: ${resume.research.technologies.join(", ")}`,
         "",
       ]);
+
       return;
     }
 
@@ -263,6 +276,7 @@ export default function Home() {
         ),
         "",
       ]);
+
       return;
     }
 
@@ -278,6 +292,7 @@ export default function Home() {
         `LinkedIn: ${resume.contact.linkedin}`,
         "",
       ]);
+
       return;
     }
 
@@ -299,9 +314,15 @@ export default function Home() {
       addOutput([
         "",
         "GitHub profile:",
-        "GitHub link will be added soon.",
+        "https://github.com/harshpaygude/harsh-terminal-resume",
         "",
       ]);
+
+      window.open(
+        "https://github.com/harshpaygude/harsh-terminal-resume",
+        "_blank"
+      );
+
       return;
     }
 
@@ -333,6 +354,7 @@ export default function Home() {
         "resume.pdf",
         "",
       ]);
+
       return;
     }
 
@@ -343,6 +365,7 @@ export default function Home() {
         "/home/harshwardhan/portfolio",
         "",
       ]);
+
       return;
     }
 
@@ -361,6 +384,7 @@ export default function Home() {
         "        Status:   Open to opportunities",
         "",
       ]);
+
       return;
     }
 
@@ -382,6 +406,7 @@ export default function Home() {
         "→ TensorFlow / PyTorch",
         "",
       ]);
+
       return;
     }
 
@@ -407,7 +432,9 @@ export default function Home() {
     setInput("");
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     // UP ARROW
     if (e.key === "ArrowUp") {
       e.preventDefault();
@@ -464,6 +491,7 @@ export default function Home() {
           <span className="text-green-500">●</span>
           <span className="text-green-500">●</span>
           <span className="text-green-500">●</span>
+
           <span className="ml-3 text-green-300">
             harsh@portfolio:~
           </span>
