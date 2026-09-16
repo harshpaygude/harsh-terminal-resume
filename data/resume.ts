@@ -8,7 +8,7 @@ export const resume = {
       year: "2026",
       degree: "B.Tech in Computer Science (AI&DS)",
       institute: "MIT World Peace University, Pune",
-      score: "CGPA: 7.40 / 10",
+      score: "CGPA: 7.54 / 10",
     },
     {
       year: "2022",
