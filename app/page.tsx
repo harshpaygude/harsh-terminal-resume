@@ -32,8 +32,8 @@ export default function Home() {
   const [input, setInput] = useState("");
 
   const [output, setOutput] = useState<string[]>([
-    "Welcome to Harshwardhan Paygude's terminal portfolio.",
-    "Type 'help' to see available commands.",
+    "Welcome to Harshwardhan Paygude's portfolio.",
+    "Type 'help' to explore.",
     "",
   ]);
 
@@ -43,7 +43,6 @@ export default function Home() {
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Automatically scroll to newest output
   useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop =
@@ -51,7 +50,6 @@ export default function Home() {
     }
   }, [output]);
 
-  // Keep input focused
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
@@ -75,12 +73,12 @@ export default function Home() {
       "",
       `┌─ ${project.name}`,
       "│",
-      `│ Date: ${project.date}`,
-      `│ Technologies: ${project.technologies.join(", ")}`,
+      `│ DATE          ${project.date}`,
+      `│ STACK         ${project.technologies.join(", ")}`,
       "│",
       ...project.description.map((item) => `│ ${item}`),
       "│",
-      "└────────────────────────────────────────",
+      "└────────────────────────────────────────────",
       "",
     ];
   };
@@ -93,334 +91,315 @@ export default function Home() {
     setHistory((prev) => [...prev, command]);
     setHistoryIndex(-1);
 
-    addOutput(`$ ${command}`);
+    addOutput(`visitor@portfolio:~$ ${command}`);
 
-    // HELP
     if (cmd === "help") {
       addOutput([
         "",
-        "Available commands:",
-        "",
-        "  about / whoami       → About me",
-        "  education            → Education",
-        "  skills               → Technical skills",
-        "  experience           → Work experience",
-        "  projects             → View all projects",
-        "  project 1            → MNIST Digit Classifier",
-        "  project 2            → Car Sales Dashboard",
-        "  project 3            → Vastu Interior Advisor",
-        "  project 4            → Gear Defect Detection",
-        "  research             → Research publication",
-        "  certifications       → Certifications",
-        "  contact              → Contact information",
-        "  resume               → Open resume PDF",
-        "  github               → GitHub profile",
-        "  linkedin             → LinkedIn profile",
-        "  ls                   → List available sections",
-        "  pwd                  → Show current directory",
-        "  neofetch             → System information",
-        "  sudo hire harsh      → ???",
-        "  clear                → Clear terminal",
+        "┌─ AVAILABLE COMMANDS ───────────────────────┐",
+        "│                                             │",
+        "│  about          About me                   │",
+        "│  education      Education                   │",
+        "│  skills         Technical skills            │",
+        "│  experience     Work experience             │",
+        "│  projects       All projects                │",
+        "│  project 1-4    Project details             │",
+        "│  research       Research publication         │",
+        "│  certifications Certifications               │",
+        "│  contact        Contact information          │",
+        "│  resume         Open resume                  │",
+        "│  github         GitHub profile               │",
+        "│  linkedin       LinkedIn profile             │",
+        "│  neofetch       System information           │",
+        "│  ls             List directories             │",
+        "│  pwd            Current directory            │",
+        "│  clear          Clear terminal               │",
+        "│                                             │",
+        "└─────────────────────────────────────────────┘",
         "",
       ]);
-
       return;
     }
 
-    // ABOUT
     if (cmd === "about" || cmd === "whoami") {
       addOutput([
         "",
-        `Name: ${resume.name}`,
-        "Role: Computer Science (AI&DS) Student",
-        "",
-        "I am a Computer Science student focused on",
-        "Artificial Intelligence, Machine Learning,",
-        "Generative AI and Computer Vision.",
+        "╭─ ABOUT ─────────────────────────────────────╮",
+        "│                                             │",
+        `│  ${resume.name}`,
+        "│                                             │",
+        "│  Computer Science (AI & Data Science)",
+        "│                                             │",
+        "│  Focused on Artificial Intelligence,",
+        "│  Machine Learning, Generative AI,",
+        "│  Computer Vision and intelligent systems.",
+        "│                                             │",
+        "╰─────────────────────────────────────────────╯",
         "",
       ]);
-
       return;
     }
 
-    // EDUCATION
     if (cmd === "education") {
       addOutput([
         "",
-        "EDUCATION",
-        "─────────",
-        "",
+        "╭─ EDUCATION ─────────────────────────────────╮",
+        "│                                             │",
         ...resume.education.flatMap((edu) => [
-          `${edu.year} | ${edu.degree}`,
-          `${edu.institute}`,
-          `Score: ${edu.score}`,
-          "",
+          `│  ${edu.year}  ${edu.degree}`,
+          `│  ${edu.institute}`,
+          `│  Score: ${edu.score}`,
+          "│",
         ]),
+        "╰─────────────────────────────────────────────╯",
+        "",
       ]);
-
       return;
     }
 
-    // SKILLS
     if (cmd === "skills") {
       addOutput([
         "",
-        "TECHNICAL SKILLS",
-        "────────────────",
-        "",
-        `Languages:       ${resume.skills.languages.join(", ")}`,
-        `Frameworks:      ${resume.skills.frameworks.join(", ")}`,
-        `Databases:       ${resume.skills.databases.join(", ")}`,
-        `Tools:           ${resume.skills.tools.join(", ")}`,
-        `Generative AI:   ${resume.skills.generativeAI.join(", ")}`,
+        "╭─ TECHNICAL SKILLS ──────────────────────────╮",
+        "│                                             │",
+        `│  LANGUAGES     ${resume.skills.languages.join(", ")}`,
+        "│",
+        `│  FRAMEWORKS    ${resume.skills.frameworks.join(", ")}`,
+        "│",
+        `│  DATABASES     ${resume.skills.databases.join(", ")}`,
+        "│",
+        `│  TOOLS         ${resume.skills.tools.join(", ")}`,
+        "│",
+        `│  GEN AI        ${resume.skills.generativeAI.join(", ")}`,
+        "│",
+        "╰─────────────────────────────────────────────╯",
         "",
       ]);
-
       return;
     }
 
-    // EXPERIENCE
     if (cmd === "experience") {
       addOutput([
         "",
-        "WORK EXPERIENCE",
-        "───────────────",
-        "",
+        "╭─ EXPERIENCE ─────────────────────────────────╮",
+        "│                                             │",
         ...resume.experience.flatMap((exp) => [
-          `${exp.role}`,
-          `${exp.company} | ${exp.date}`,
-          "",
-          ...exp.description.map((item) => `• ${item}`),
-          "",
+          `│  ${exp.role}`,
+          `│  ${exp.company}  •  ${exp.date}`,
+          "│",
+          ...exp.description.map((item) => `│  • ${item}`),
+          "│",
         ]),
+        "╰─────────────────────────────────────────────╯",
+        "",
       ]);
-
       return;
     }
 
-    // PROJECTS
     if (cmd === "projects") {
       addOutput([
         "",
-        "PROJECTS",
-        "────────",
-        "",
+        "╭─ PROJECT INDEX ──────────────────────────────╮",
+        "│                                             │",
         ...resume.projects.flatMap((project, index) => [
-          `[${index + 1}] ${project.name}`,
-          `    ${project.date}`,
-          `    ${project.technologies.join(", ")}`,
-          "",
+          `│  [0${index + 1}]  ${project.name}`,
+          `│       ${project.date}`,
+          `│       ${project.technologies.join(" • ")}`,
+          "│",
         ]),
-        "Use 'project 1', 'project 2', etc. for details.",
+        "│  Type 'project 1' through 'project 4'       │",
+        "│  to inspect a project.                      │",
+        "│                                             │",
+        "╰─────────────────────────────────────────────╯",
         "",
       ]);
-
       return;
     }
 
-    // PROJECT 1
     if (cmd === "project 1") {
       addOutput(formatProject(0));
       return;
     }
 
-    // PROJECT 2
     if (cmd === "project 2") {
       addOutput(formatProject(1));
       return;
     }
 
-    // PROJECT 3
     if (cmd === "project 3") {
       addOutput(formatProject(2));
       return;
     }
 
-    // PROJECT 4
     if (cmd === "project 4") {
       addOutput(formatProject(3));
       return;
     }
 
-    // RESEARCH
     if (cmd === "research") {
       addOutput([
         "",
-        "RESEARCH",
-        "────────",
-        "",
-        resume.research.title,
-        "",
-        `Conference: ${resume.research.conference}`,
-        `Date: ${resume.research.date}`,
-        `Result: ${resume.research.result}`,
-        "",
-        resume.research.detail,
-        "",
-        `Technologies: ${resume.research.technologies.join(", ")}`,
+        "╭─ RESEARCH ───────────────────────────────────╮",
+        "│                                             │",
+        `│  ${resume.research.title}`,
+        "│",
+        `│  Conference: ${resume.research.conference}`,
+        `│  Date:       ${resume.research.date}`,
+        `│  Result:     ${resume.research.result}`,
+        "│",
+        `│  ${resume.research.detail}`,
+        "│",
+        `│  Stack: ${resume.research.technologies.join(", ")}`,
+        "│",
+        "╰─────────────────────────────────────────────╯",
         "",
       ]);
-
       return;
     }
 
-    // CERTIFICATIONS
     if (cmd === "certifications") {
       addOutput([
         "",
-        "CERTIFICATIONS",
-        "──────────────",
-        "",
+        "╭─ CERTIFICATIONS ─────────────────────────────╮",
+        "│                                             │",
         ...resume.certifications.map(
-          (cert, index) => `${index + 1}. ${cert}`
+          (cert, index) => `│  [${index + 1}] ${cert}`
         ),
+        "│                                             │",
+        "╰─────────────────────────────────────────────╯",
         "",
       ]);
-
       return;
     }
 
-    // CONTACT
     if (cmd === "contact") {
       addOutput([
         "",
-        "CONTACT",
-        "───────",
-        "",
-        `Email:    ${resume.contact.email}`,
-        `Phone:    ${resume.contact.phone}`,
-        `LinkedIn: ${resume.contact.linkedin}`,
+        "╭─ CONTACT ────────────────────────────────────╮",
+        "│                                             │",
+        `│  EMAIL     ${resume.contact.email}`,
+        `│  PHONE     ${resume.contact.phone}`,
+        "│  LINKEDIN  Open with 'linkedin'",
+        "│  GITHUB    Open with 'github'",
+        "│                                             │",
+        "╰─────────────────────────────────────────────╯",
         "",
       ]);
-
       return;
     }
 
-    // RESUME
     if (cmd === "resume") {
       window.open("/resume.pdf", "_blank");
 
       addOutput([
         "",
-        "Opening resume...",
+        "→ Opening resume.pdf...",
         "",
       ]);
-
       return;
     }
 
-    // GITHUB
     if (cmd === "github") {
-      addOutput([
-        "",
-        "GitHub profile:",
-        "https://github.com/harshpaygude/harsh-terminal-resume",
-        "",
-      ]);
-
       window.open(
         "https://github.com/harshpaygude/harsh-terminal-resume",
         "_blank"
       );
 
+      addOutput([
+        "",
+        "→ Opening GitHub...",
+        "",
+      ]);
       return;
     }
 
-    // LINKEDIN
     if (cmd === "linkedin") {
       window.open(resume.contact.linkedin, "_blank");
 
       addOutput([
         "",
-        "Opening LinkedIn profile...",
+        "→ Opening LinkedIn...",
         "",
       ]);
-
       return;
     }
 
-    // LS
     if (cmd === "ls") {
       addOutput([
         "",
-        "about/",
-        "education/",
-        "skills/",
-        "experience/",
-        "projects/",
-        "research/",
-        "certifications/",
-        "contact/",
-        "resume.pdf",
+        "drwxr-xr-x  about/",
+        "drwxr-xr-x  education/",
+        "drwxr-xr-x  skills/",
+        "drwxr-xr-x  experience/",
+        "drwxr-xr-x  projects/",
+        "drwxr-xr-x  research/",
+        "drwxr-xr-x  certifications/",
+        "drwxr-xr-x  contact/",
+        "-rw-r--r--  resume.pdf",
         "",
       ]);
-
       return;
     }
 
-    // PWD
     if (cmd === "pwd") {
       addOutput([
         "",
         "/home/harshwardhan/portfolio",
         "",
       ]);
-
       return;
     }
 
-    // NEOFETCH
     if (cmd === "neofetch") {
       addOutput([
         "",
-        "        ╭─────────────────────────────╮",
-        "        │     HARSHWARDHAN PAYGUDE     │",
-        "        ╰─────────────────────────────╯",
+        "        ██╗  ██╗ █████╗ ██████╗ ███████╗██╗  ██╗",
+        "        ██║  ██║██╔══██╗██╔══██╗██╔════╝██║  ██║",
+        "        ███████║███████║██████╔╝███████╗███████║",
+        "        ██╔══██║██╔══██║██╔══██╗╚════██║██╔══██║",
+        "        ██║  ██║██║  ██║██║  ██║███████║██║  ██║",
+        "        ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝",
         "",
-        "        OS:       HarshOS",
-        "        Shell:    portfolio-terminal",
-        "        Role:     AI & ML Developer",
-        "        Location: Pune, India",
-        "        Status:   Open to opportunities",
+        "        USER       Harshwardhan Paygude",
+        "        ROLE       AI / ML Developer",
+        "        DEGREE     B.Tech CSE (AI & DS)",
+        "        LOCATION   Pune, India",
+        "        SHELL      portfolio-terminal",
+        "        STATUS     Available",
         "",
       ]);
-
       return;
     }
 
-    // SUDO HIRE HARSH
     if (cmd === "sudo hire harsh") {
       addOutput([
         "",
         "[sudo] password for recruiter:",
         "",
-        "Nice try 😄",
+        "ACCESS GRANTED.",
         "",
-        "Access granted.",
-        "Candidate available for hire.",
+        "Candidate profile unlocked.",
         "",
-        "→ AI / ML",
-        "→ Generative AI",
-        "→ Computer Vision",
-        "→ Python",
-        "→ TensorFlow / PyTorch",
+        "  ✓ Artificial Intelligence",
+        "  ✓ Machine Learning",
+        "  ✓ Generative AI",
+        "  ✓ Computer Vision",
+        "  ✓ Python / C++",
+        "  ✓ TensorFlow / PyTorch",
         "",
       ]);
-
       return;
     }
 
-    // CLEAR
     if (cmd === "clear") {
       setOutput([]);
       return;
     }
 
-    // UNKNOWN COMMAND
     addOutput([
       "",
-      `Command not found: ${command}`,
-      "Type 'help' to see available commands.",
+      `command not found: ${command}`,
+      "Type 'help' for available commands.",
       "",
     ]);
   };
@@ -435,7 +414,6 @@ export default function Home() {
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    // UP ARROW
     if (e.key === "ArrowUp") {
       e.preventDefault();
 
@@ -450,7 +428,6 @@ export default function Home() {
       setInput(history[newIndex]);
     }
 
-    // DOWN ARROW
     if (e.key === "ArrowDown") {
       e.preventDefault();
 
@@ -469,7 +446,6 @@ export default function Home() {
       }
     }
 
-    // TAB AUTOCOMPLETE
     if (e.key === "Tab") {
       e.preventDefault();
 
@@ -484,66 +460,229 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-green-400 font-mono">
-      {/* TERMINAL HEADER */}
-      <header className="border-b border-green-900 px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="text-green-500">●</span>
-          <span className="text-green-500">●</span>
-          <span className="text-green-500">●</span>
+    <main className="portfolio-shell">
+      <div className="background-grid" />
 
-          <span className="ml-3 text-green-300">
-            harsh@portfolio:~
-          </span>
-        </div>
+      <div className="portfolio-layout">
 
-        <div className="text-xs text-green-700 hidden sm:block">
-          TERMINAL PORTFOLIO
-        </div>
-      </header>
+        {/* LEFT IDENTITY PANEL */}
+        <aside className="identity-panel">
 
-      {/* TERMINAL */}
-      <div
-        ref={terminalRef}
-        onClick={() => inputRef.current?.focus()}
-        className="h-[calc(100vh-90px)] overflow-y-auto px-4 py-5 sm:px-8 cursor-text"
-      >
-        {/* OUTPUT */}
-        <div className="whitespace-pre-wrap break-words leading-7">
-          {output.map((line, index) => (
-            <div key={index}>{line}</div>
-          ))}
-        </div>
+          <div className="identity-card">
 
-        {/* COMMAND INPUT */}
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-start mt-1"
-        >
-          <span className="mr-2 text-green-500 shrink-0">
-            harsh@portfolio:~$
-          </span>
+            <div className="card-top">
+              <span className="access-label">
+                ACCESS GRANTED
+              </span>
 
-          <div className="relative flex-1">
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              autoComplete="off"
-              spellCheck={false}
-              className="w-full bg-transparent outline-none text-green-400 caret-transparent"
-            />
+              <span className="status-dot" />
+            </div>
 
-            {/* BLINKING CURSOR */}
-            <span className="absolute left-0 top-0 pointer-events-none">
-              {input}
-              <span className="inline-block w-2 h-5 ml-[1px] bg-green-400 animate-pulse align-middle" />
-            </span>
+            {/* PHOTO-FREE ID AREA */}
+            <div className="identity-symbol">
+              <div className="monogram">
+                HP
+              </div>
+
+              <div className="symbol-ring" />
+            </div>
+
+            <div className="identity-name">
+              {resume.name}
+            </div>
+
+            <div className="identity-role">
+              AI &amp; ML / GENERATIVE AI
+            </div>
+
+            <div className="identity-degree">
+              B.TECH • COMPUTER SCIENCE
+              <br />
+              AI &amp; DATA SCIENCE
+            </div>
+
+            <div className="card-divider" />
+
+            <div className="identity-meta">
+              <div>
+                <span>STATUS</span>
+                <strong>AVAILABLE</strong>
+              </div>
+
+              <div>
+                <span>LOCATION</span>
+                <strong>PUNE, INDIA</strong>
+              </div>
+            </div>
+
+            <div className="barcode">
+              {Array.from({ length: 42 }).map((_, i) => (
+                <span
+                  key={i}
+                  style={{
+                    height: `${12 + ((i * 7) % 18)}px`,
+                  }}
+                />
+              ))}
+            </div>
+
+            <div className="barcode-label">
+              HP / AI-DS / 2026
+            </div>
+
           </div>
-        </form>
+
+          {/* SOCIAL LINKS */}
+          <div className="social-links">
+
+            <button
+              onClick={() =>
+                window.open(
+                  "https://github.com/harshpaygude/harsh-terminal-resume",
+                  "_blank"
+                )
+              }
+            >
+              GITHUB
+            </button>
+
+            <button
+              onClick={() =>
+                window.open(
+                  resume.contact.linkedin,
+                  "_blank"
+                )
+              }
+            >
+              LINKEDIN
+            </button>
+
+            <button
+              onClick={() =>
+                (window.location.href =
+                  `mailto:${resume.contact.email}`)
+              }
+            >
+              EMAIL
+            </button>
+
+          </div>
+
+          <div className="identity-hint">
+            <span>TIP</span>
+            Type <b>help</b> in the terminal
+          </div>
+
+        </aside>
+
+        {/* RIGHT TERMINAL */}
+        <section className="terminal-window">
+
+          {/* TERMINAL TITLE BAR */}
+          <div className="terminal-titlebar">
+
+            <div className="window-controls">
+              <span className="control red" />
+              <span className="control yellow" />
+              <span className="control green" />
+            </div>
+
+            <div className="terminal-title">
+              harshwardhan@portfolio — zsh
+            </div>
+
+            <div className="terminal-size">
+              80×24
+            </div>
+
+          </div>
+
+          {/* TERMINAL CONTENT */}
+          <div
+            ref={terminalRef}
+            className="terminal-content"
+            onClick={() => inputRef.current?.focus()}
+          >
+
+            <div className="login-line">
+              Last login: Today on portfolio-terminal
+            </div>
+
+            <div className="welcome-line">
+              Welcome. Type <span>'help'</span> for available commands.
+            </div>
+
+            <div className="terminal-separator">
+              ─────────────────────────────────────────────
+            </div>
+
+            <div className="terminal-output">
+
+              {output.map((line, index) => (
+                <div
+                  key={index}
+                  className={
+                    line.startsWith("visitor@portfolio")
+                      ? "command-line"
+                      : ""
+                  }
+                >
+                  {line}
+                </div>
+              ))}
+
+            </div>
+
+            {/* INPUT */}
+            <form
+              onSubmit={handleSubmit}
+              className="command-form"
+            >
+
+              <span className="prompt">
+                visitor@portfolio:~$
+              </span>
+
+              <div className="input-wrapper">
+
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) =>
+                    setInput(e.target.value)
+                  }
+                  onKeyDown={handleKeyDown}
+                  autoComplete="off"
+                  spellCheck={false}
+                  aria-label="Terminal command"
+                />
+
+                <span className="terminal-cursor" />
+
+              </div>
+
+            </form>
+
+          </div>
+
+          {/* TERMINAL FOOTER */}
+          <div className="terminal-footer">
+            <span>UTF-8</span>
+            <span>TERMINAL</span>
+            <span>READY</span>
+          </div>
+
+        </section>
+
       </div>
+
+      {/* MOBILE FOOTER */}
+      <div className="mobile-command-hint">
+        <span>visitor@portfolio:~$</span>
+        <span>Type "help" to begin</span>
+      </div>
+
     </main>
   );
 }
